@@ -87,15 +87,26 @@ table tr:hover {
     background: #e9ecef;
 }
 
-.delete a {
-    color: white;
-    background: #d9534f;
-    padding: 6px 12px;
-    border-radius: 5px;
-    text-decoration: none;
-    font-size: 14px;
+.del-button {
+    background-color: #ff4d4d; /* Red background */
+    color: white;             /* White text */
+    border: none;             /* Remove border */
+    padding: 10px 20px;       /* Add some padding */
+    border-radius: 5px;       /* Rounded corners */
+    cursor: pointer;          /* Pointer cursor on hover */
+    font-size: 16px;          /* Font size */
+    transition: background-color 0.3s ease; /* Smooth transition */
 }
 
-.delete a:hover {
-    background: #c9302c;
+.del-button:hover {
+    background-color: #ff1a1a; /* Darker red on hover */
+}
+
+.del-button:active {
+    background-color: #e60000; /* Even darker red on click */
+}
+
+.del-button:focus {
+    outline: none; /* Remove default focus outline */
+    box-shadow: 0 0 0 3px rgba(255, 77, 77, 0.5); /* Custom focus outline */
 }
