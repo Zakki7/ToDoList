@@ -238,4 +238,38 @@ class Fcc{
         echo "<br>". Self::$society . ' : '. $name . "<br>";
     }
 }
+
+
+interface father{
+        const a = 20;
+        function display();
+
+}
+interface mother {
+        const b = 30;
+        function multi();
+}
+interface son extends father,mother{
+        const c = 30;
+        function sum();
+}
+
+class daughter implements son{
+        public $value;
+        function display(){
+                echo "<br>". father::a ." " ;
+        }
+        function sum(){ 
+                echo '<br>' . father::a + mother::b;
+        }
+        function multi(){}
+}
+
+$obj = new daughter;
+$obj->display();
+$obj->sum();
+
+//Multi level inheritance *One class and Interfance* extends than implement
+
+
 ?>

@@ -44,11 +44,16 @@ if (isset($_POST['submit'])) {
 $que = "SELECT * from Tasks";
 $result = $db->query($que);
 
-if (isset($_POST["id"])) {
-        $id = $_POST['id'];
-        $del = mysqli_query($db, "DELETE FROM Tasks where 'id'= '$id' ");
-}
+if (isset($_REQUEST['delete'])){
+        $del = ("DELETE FROM Tasks WHERE id = {$_REQUEST['id']}");
+        if (mysqli_query($db, $del)){
+                
+        }
+        else{
+                echo "Error";
+        }
 
+}
 
 ?>
 
@@ -57,14 +62,19 @@ if (isset($_POST["id"])) {
 
 <head>
         <title>ToDo List Application</title>
-        <link rel="stylesheet" type="text/css" href="style.css">
+        <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+        <meta http-equiv="Pragma" content="no-cache" />
+        <meta http-equiv="Expires" content="0" />
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+        <link rel="stylesheet" type="text/css" href="style.css?v= <? $version ?> ">
 </head>
 
 <body>
         <div class="heading">
                 <h2> ToDo List Application PHP</h2>
         </div>
-        <form method="post" action="index.php" class="input_form">
+        <form class= "data" method="post" action="index.php" class="input_form">
 
                 <input type="text" name="task" class="task_input">
 
@@ -88,21 +98,28 @@ if (isset($_POST["id"])) {
                 <?php
                         if ($result->num_rows > 0) {
                                 
-                                while($row = $result->fetch_assoc()){
-                                        echo "<tr>
-                                        <td>" . $row['$id'] . "</td> 
-                                        <td>" . $row['Task'] . "</td>
-                                        <td> 
-                                        <button class= 'del-button " .$row['id'] . "'  = >Delete</button> 
-                                        </td>
-                                        <tr>";
+                                while($row = mysqli_fetch_assoc($result)){
+                                        
+                                        echo "<tr>";
+                                        echo "<td>" . '.' .  "</td>"; 
+                                        echo "<td>" . $row['Task'] .   "</td>"; 
+                                        echo '<td>
+                                        <form action="index.php" method="POST">
+                                          <input type="hidden" name="id" value= '. $row['id']. '>
+                                          <input type="submit" class="btn btn-sm btn-danger custom-btn" name="delete" value="Delete">
+                                        </form>
+                                      </td>';
+                                        
                                 }
                 
                                 echo "</table>";
                         }
                         else{
-                                echo "No Tasks";
-                        
+                                echo "<tr>
+                                        <td>" . '.' . "</td> 
+                                        <td>" . 'No Task ' . "</td>
+                                        <td>
+                                        </tr>"; 
                         }
 
                        
@@ -126,7 +143,6 @@ if (isset($_POST["id"])) {
 
 
         </script>
-
 
 
 </body>
