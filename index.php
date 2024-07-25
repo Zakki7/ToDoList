@@ -135,11 +135,12 @@ if (isset($_REQUEST['delete'])){
 
 
         </table>
+        <?php $db->close()?>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
         <script>
-                $('td').slideUp(1000).slideDown(1000);
-                $('th').slideUp(2000).slideDown(1000);
+                $('td').slideUp(1000).slideDown();
+                $('th').slideUp(2000).slideDown();
 
 
         </script>
